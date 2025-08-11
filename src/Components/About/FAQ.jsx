@@ -12,8 +12,8 @@ import 'aos/dist/aos.css';
 
 const faqs = [
   {
-    question: 'What hair loss treatments are available in Dindigul?',
-    answer: 'At GroHair Dindigul, we provide FUE Hair Transplants, PRP therapy, Mesotherapy, Scalp Micropigmentation, and Low-Level Laser Therapy to control hair fall and support healthy regrowth',
+    question: 'What hair loss treatments are available in Kanchipuram?',
+    answer: 'At GroHair Kanchipuram, we provide FUE Hair Transplants, PRP therapy, Mesotherapy, Scalp Micropigmentation, and Low-Level Laser Therapy to control hair fall and support healthy regrowth',
   },
   {
     question: 'How does the hair transplant process work?',
@@ -40,8 +40,8 @@ const faqs = [
     answer: 'Cost depends on how many grafts are needed, your scalp condition, and the technique used. We’ll give you a clear estimate after a consultation.',
   },
   {
-    question: 'How can I book a consultation with the GroHair Dindigul team?',
-    answer: 'You can call us, walk into our Dindigul clinic, or schedule through our online form. We’ll set you up with a personalized session',
+    question: 'How can I book a consultation with the GroHair Kanchipuram team?',
+    answer: 'You can call us, walk into our Kanchipuram clinic, or schedule through our online form. We’ll set you up with a personalized session',
   },
 ];
 
@@ -57,7 +57,7 @@ const FAQ = () => {
   };
 
   return (
-    <Box  data-aos="fade-up" sx={{ px: 4, py: 10, bgcolor: '#f9f9f9', mb: 4,width:{xs:'85%',lg:'100%',sm:'95%'} }}>
+    <Box  data-aos="fade-up" sx={{ px: 4, py: 10, bgcolor: '#f9f9f9', mb: 4,width:{xs:'85%',lg:'100%',sm:'95%',md:'98%'} }}>
       <Typography fontSize={{XS:'1.1rem',sm:'1.5rem'}} align="center" fontWeight={700} gutterBottom color="#000000ff">
         FREQUENTLY ASKED QUESTION  <Box component="span" color="#ff0000ff">
                         HAIR TREATMENT

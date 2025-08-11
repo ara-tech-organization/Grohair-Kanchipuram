@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import AboutImg from "../Images/2.jpeg"; // make sure it's a girl image
+import AboutImg from "../Images/3.jpg"; // make sure it's a girl image
 
 const Section = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -21,12 +21,12 @@ const Section = () => {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        px: { xs: 1, md: 0, sm: 1 },
+        // px: { md: 0, },
         py: 6,
         backgroundColor: "#fff",
         position: "relative",
         mb: { md: 10 },
-        ml: { sm: 3, lg: 1, md: 8 },
+        // ml: {  lg: 1, md: 8 ,xs:-1},
       }}
     >
       {/* Left Side - Text */}
@@ -35,7 +35,7 @@ const Section = () => {
         sx={{
           flex: 1,
           textAlign: { xs: "center", md: "left" },
-          ml: { sm: -5, lg: 2 },
+          ml: { sm: 5, lg: 15 },
         }}
       >
         <Typography
@@ -54,7 +54,7 @@ const Section = () => {
             fontWeight: 700,
             color: "#E2231A",
             fontSize: {
-              xs: "1.3rem",
+              xs: "1.2rem",
               sm: "1.8rem",
               md: "2.5rem",
               lg: "2rem",
@@ -63,7 +63,7 @@ const Section = () => {
             lineHeight: 1.4,
           }}
         >
-          Welcome to GroHair & GloSkin <br /> Dindigul
+          Welcome to GroHair & GloSkin <br /> Kanchipuram
         </Typography>
 
         <Typography
@@ -77,7 +77,7 @@ const Section = () => {
           }}
         >
           GroHair and GloSkin combine their deep expertise in hair and skin
-          wellness with the serene pace of Dindigul. Our clinic blends clinical
+          wellness with the serene pace of Kanchipuram. Our clinic blends clinical
           precision with a luxurious experience, delivered by trained
           professionals in a safe, sterile setting.
         </Typography>
@@ -90,7 +90,7 @@ const Section = () => {
             mx: { xs: "auto", md: 0 },
           }}
         >
-          At our Dindigul center, you’ll find the best of science, technology,
+          At our Kanchipuram center, you’ll find the best of science, technology,
           and personalized care. Whether it’s hair thinning, pigmentation
           issues, premature aging, or any other concern—you’ll find solutions
           tailored just for you, backed by trusted professionals.
@@ -106,7 +106,7 @@ const Section = () => {
           display: "flex",
           alignItems: "end",
           justifyContent: "end",
-          mr: { lg: 14, xs: 4, md: 10,sm:10 },
+          mr: { lg: 17, xs: 4, md: 4,sm:10 },
           maxWidth: 500,
           py:3
          

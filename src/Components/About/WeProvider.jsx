@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
-import AboutImg from "../Images/2.jpeg"; // make sure it's a girl image
+import AboutImg from "../Images/3.jpg"; // make sure it's a girl image
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -22,15 +22,14 @@ const Section = () => {
         justifyContent: "center",
         width: {lg:"95%",xs:'90%'},
         Height: "100vh",
-        px: { xs: 2, md: 0,lg:8 },
+        px: { xs: 2, md: 8 },
         py: 6,
         gap: 6,
         backgroundColor: "#fff",
         position: "relative",
         mb: { md: 10 },
-        ml: { sm: 7, lg: 1 },
+        ml: { sm: 7, lg: 1,md:3 },
         mt: 10,
-       
       }}
     >
       {/* Left Side - Text */}
@@ -39,7 +38,7 @@ const Section = () => {
         sx={{
           flex: 1,
           textAlign: { xs: "center", md: "left" },
-          ml: { sm: -5, lg: 2,md:2 },
+          ml: { sm: -5, lg: 2 },
         }}
       >
         <Typography
@@ -61,14 +60,14 @@ const Section = () => {
               xs: "1.3rem",
               sm: "1.8rem",
               md: "2.5rem",
-              lg: "2.8rem",
+              lg: "2rem",
               xl:'2rem'
             },
             mb: 3,
             lineHeight: 1.4,
           }}
         >
-          Welcome to GroHair & GloSkin <br /> Dindigul
+          Welcome to GroHair & GloSkin <br /> Kanchipuram
         </Typography>
 
         <Box>
@@ -90,7 +89,7 @@ const Section = () => {
                 p: 2,
                 borderRadius: 2,
                 maxWidth: {lg:500,md:600,sm:550},
-                height: {lg:280,md:400,xs:200,sm:100},
+                height: {lg:230,md:350,xs:200,sm:100},
                 flex: 1,
               }}
             >
@@ -98,11 +97,11 @@ const Section = () => {
                 sx={{
                   color: "#555",
                   fontSize: { xs: "0.90rem", sm: "1.3rem", md: "1.05rem" },
-                  mt: 2,
+                  mt: 1,
                 }}
               >
                 GroHair and GloSkin combine their deep expertise in hair and skin
-                wellness with the serene pace of Dindigul. Our clinic blends
+                wellness with the serene pace of Kanchipuram. Our clinic blends
                 clinical precision with a luxurious experience, delivered by
                 trained professionals in a safe, sterile setting.
               </Typography>
@@ -116,7 +115,7 @@ const Section = () => {
                 p: 2,
                 borderRadius: 2,
                 maxWidth: 550,
-                 height: {lg:280,md:400,xs:200,sm:100},
+                 height: {lg:230,md:350,xs:200,sm:100},
                 flex: 1,
               }}
             >
@@ -126,7 +125,7 @@ const Section = () => {
                   fontSize: { xs: "0.95rem", sm: "1.3rem", md: "1.05rem" },
                 }}
               >
-                At our Dindigul center, you’ll find the best of science,
+                At our Kanchipuram center, you’ll find the best of science,
                 technology, and personalized care. Whether it’s hair thinning,
                 pigmentation issues, premature aging, or any other concern—you’ll
                 find solutions tailored just for you, backed by trusted

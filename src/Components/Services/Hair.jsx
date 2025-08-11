@@ -1,261 +1,207 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  IconButton,
-  Paper,
-  Grid,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import React, { useState, useRef } from "react";
+import { Grid, Typography, Paper, Box } from "@mui/material";
 
-// Hair treatment data
-const treatments = [
+const specialties = [
   {
-    title: "Microblading",
-    desc: "A semi-permanent eyebrow enhancement technique that creates natural-looking brows through precise pigment strokes.",
-    image: require("../Images/H1.jpeg"),
+    id: 1,
+    title: "Scalp Micropigmentation (SMP)",
+    description: "Creates the look of denser hair with precision pigmentation.",
+    image: require("../Images/s1.png"),
   },
   {
-    title: "Skin Brightening Treatment",
-    desc: "A strong treatment targeting day-to-day aches and chronic pain.",
-    image: require("../Images/H2.jpeg"),
+    id: 2,
+    title: "Eyebrow Transplantation",
+    description: "Redefine your natural look with expert eyebrow restoration.",
+    image: require("../Images/s2.png"),
   },
   {
-    title: "Q-Switch Laser",
-    desc: "Advanced laser treatment that targets deep pigmentation, melasma, and stubborn dark spots. Safe for all skin types with minimal downtime.",
-    image: require("../Images/H3.jpeg"),
+    id: 3,
+    title: "Stem X Pro Therapy",
+    description: "Hair rejuvenation using stem cell growth factors.",
+    image: require("../Images/s3.jpeg"),
   },
   {
-    title: "HydraFacial",
-    desc: "A multi-step facial that cleanses, exfoliates, and deeply hydrates the skin. Ideal for improving texture, tone, and overall clarity.",
-    image: require("../Images/H4.jpeg"),
+    id: 4,
+    title: "Meso Therapy",
+    description:
+      "Nutrient-rich serums injected into the scalp to strengthen roots and regrow hair.",
+    image: require("../Images/s4.jpeg"),
   },
   {
-    title: "Laser Hair Removal",
-    desc: "A permanent hair reduction solution using FDA-approved laser technology. Safe for all body areas and suitable for both men and women.",
-    image: require("../Images/H5.jpeg"),
+    id: 5,
+    title: "Oxygen Laser Therapy",
+    description:
+      "Laser technique + oxygen infusion to nourish the scalp and boost circulation.",
+    image: require("../Images/s5.jpeg"),
   },
 ];
 
-const HairSection = () => {
-  const [index, setIndex] = useState(2); // Start from center card
-  const theme = useTheme();
-  const isMdDown = useMediaQuery(theme.breakpoints.down("md"));
-
-  const handlePrev = () => {
-    setIndex((prev) => (prev - 1 + treatments.length) % treatments.length);
-  };
-
-  const handleNext = () => {
-    setIndex((prev) => (prev + 1) % treatments.length);
-  };
-
-  const getCardStyle = (i) => {
-    const pos = (i - index + treatments.length) % treatments.length;
-    const relPos = pos > Math.floor(treatments.length / 2) ? pos - treatments.length : pos;
-
-    const scaleMap = [0.7, 0.85, 1, 0.85, 0.7];
-    const opacityMap = [0.4, 0.7, 1, 0.7, 0.4];
-    const zIndexMap = [1, 2, 3, 2, 1];
-    const translateXMap = [-220, -120, 0, 120, 200];
-
-    if (relPos >= -2 && relPos <= 2) {
-      const mapIndex = relPos + 2;
-      return {
-        transform: isMdDown
-          ? `translateX(-50%) scale(${scaleMap[mapIndex]})`
-          : `translateX(${translateXMap[mapIndex]}px) scale(${scaleMap[mapIndex]})`,
-        opacity: opacityMap[mapIndex],
-        zIndex: zIndexMap[mapIndex],
-        transition: "all 0.5s ease",
-        position: "absolute",
-        left: "50%",
-        top: 0,
-        transformOrigin: "center",
-        transformStyle: "preserve-3d",
-      };
-    }
-
-    return { display: "none" };
-  };
+const SpecialtySlider = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const selected = specialties[selectedIndex];
+  const scrollRef = useRef(null);
+  const cardRefs = useRef([]);
 
   return (
-    <Box
-      sx={{
-        backgroundColor: "#fff",
-        px: { xs: 2, sm: 10, md: 2, lg: 5 },
-        mt: 5,
-        ml: { sm:2,xs: -1},
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }}
-    >
+    <Box sx={{ bgcolor: "#fefdfdff", py: 10, px: { xs: 2, md: 8, lg: 1 } }}>
       <Typography
-        fontSize={{ sm: "2rem", xs: "1.7rem" }}
+        fontSize={{ lg: "2rem", xs: "1.7rem", sm: "2rem" }}
         fontWeight="bold"
-        fontFamily="Poppins"
         textAlign="center"
-        mb={{ xs: 5, sm: 6, md: 8, lg: 10 }}
-        mt={5}
+        fontFamily="Poppins"
+        mt={{ lg: 9, md: 10, sm: 6, xs: 5 }}
+        mb={{ xs: 5, sm: 6, md: -5, lg: 1 }}
+        ml={{ lg: 5 }}
       >
-        HAIR TREATMENT
+        HAIR{" "}
+        <Box component="span" color="#ff0000ff">
+          TREATMENT
+        </Box>
       </Typography>
 
-      <Grid container spacing={5} alignItems="center">
-        {/* LEFT: Carousel */}
+      <Grid container spacing={4} alignItems="center">
+        {/* Right Section - Text + Cards */}
         <Grid
-          item
-          xs={12}
-          md={6}
-          order={{ xs: 2, md: 1 }}
-          display="flex"
-          justifyContent={{ xs: "center", md: "left" }}
-          mt={{ xs: 5, sm: 5, md: 0 }}
-        >
-          <Box
-            position="relative"
-            height={isMdDown ? 400 : 500}
-            width="100%"
-            maxWidth={isMdDown ? 320 : 600}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            {treatments.map((treatment, i) => (
-              <Paper
-                key={i}
-                sx={{
-                 width: isMdDown ? 260 : 340,
-                  height: isMdDown ? 360 : 450,
-                  borderRadius: 4,
-                  overflow: "hidden",
-                  position: "absolute",
-                  backgroundColor: "#fff",
-                  color: "black",
-                  ml:{lg:40,xs:20,sm:35},
-                  ...getCardStyle(i),
-                }}
-                elevation={10}
-              >
-                <Box
-                  component="img"
-                  src={treatment.image}
-                  alt={treatment.title}
-                  sx={{
-                    width: "100%",
-                    height: "50%",
-                    objectFit: "cover",
-                    objectPosition: "center",
-                    display: "block",
-                    filter: i === index ? "none" : "brightness(50%)",
-                    transition: "filter 0.3s ease",
-                  }}
-                />
-                <Box p={3}>
-                  <Typography fontSize={{ lg: "1.8rem", xs: "1.4rem" }} fontWeight="bold">
-                    {treatment.title}
-                  </Typography>
-                  <Typography variant="body2" mt={1}>
-                    {treatment.desc}
-                  </Typography>
-                </Box>
-              </Paper>
-            ))}
-          </Box>
-        </Grid>
-
-        {/* RIGHT: Content */}
-        <Grid
-          item
-          xs={12}
-          md={5}
-          order={{ xs: 1, md: 2 }}
-          display="flex"
-          justifyContent="center"
-          sx={{ ml: { md: "200%" } }}
+          size={{ lg: 6, xs: !2 }}
+          order={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+          mt={5}
         >
           <Box
             display="flex"
             flexDirection="column"
-            justifyContent="center"
-            alignItems={{ xs: "center", md: "flex-start" }}
-            textAlign={{ xs: "center", md: "left" }}
-            px={{ xs: 2, sm: 4, md: 1 }}
+            alignItems="center"
+            textAlign="center"
             height="100%"
-            
+            mt={1}
           >
-            <Typography fontSize={{ sm: "1.2rem" }} color="text.secondary" mb={1}>
-              Most Popular Hair Solutions in Dindigul
+            <Typography variant="h6" color="text.secondary" mb={1}>
+              Top Hair Solutions at GloSkin Kanchipuram
             </Typography>
 
             <Typography
-              variant="h4"
+              fontSize={{ lg: "1.8rem", xs: "1.8rem" }}
               fontWeight="bold"
               color="red"
               fontFamily="Poppins"
               mb={3}
-              fontSize={{ sm: "1.4rem",xs:'1.8rem' }}
-              width={{ xs: "100%", md: 400 }}
             >
-              Our Most Popular Hair Treatments
+              Top Hair Solutions at GroHair Kanchipuram
             </Typography>
 
-            <Typography
-              variant="h6"
-              color="black"
-              sx={{ maxWidth: { xs: "100%", md: 470, sm: "100%" } }}
-              mb={5}
-            >
+            <Typography variant="h6" color="black" mb={5} ml={{lg:3}}>
               Combat hair thinning, bald spots, and hair fall with proven,
-              personalized treatments tailored to your scalp and hair type. Our
-              expert dermatologists craft treatment plans that truly work.
-              Experience visible transformation with trusted and advanced care.
+              personalized treatments tailored to your scalp and hair type.
+              Experience visible transformation with expert dermatologists.
             </Typography>
 
+            {/* Card Layout */}
             <Box
-              mt={1}
-              display="flex"
-              justifyContent={{ xs: "center", md: "flex-start" }}
-              gap={2}
+              ref={scrollRef}
+              sx={{
+                display: { xs: "block", sm: "block", md: "flex", lg: "flex" },
+                flexWrap: { md: "wrap", lg: "nowrap" },
+                justifyContent: { md: "center", lg: "flex-start" },
+                overflow: {
+                  xs: "hidden",
+                  sm: "hidden",
+                  md: "hidden",
+                  lg: "auto",
+                },
+                gap: 1,
+                pb: 1,
+                scrollSnapType: { xs: "none", lg: "x mandatory" },
+                width: "100%",
+                height: "90%",
+                ml: { lg: 10, md: -7, xs: 0 },
+              }}
             >
-              <IconButton
-                onClick={handlePrev}
-                sx={{
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  "&:hover": {
-                    backgroundColor: "#E2231A",
-                  },
-                  transition: "all 0.2s ease",
-                }}
-              >
-                <ArrowBackIosNewIcon />
-              </IconButton>
+              {specialties.map((item, index) => (
+                <Paper
+                  key={item.id}
+                  ref={(el) => (cardRefs.current[index] = el)}
+                  onClick={() => {
+                    setSelectedIndex(index); // changes image only
+                    cardRefs.current[index]?.scrollIntoView({
+                      behavior: "smooth",
+                      inline: "center",
+                      block: "nearest",
+                    });
+                  }}
+                  sx={{
+                    py: 5,
+                    px: 3,
+                    ml: { xs: 7 ,lg:2},
+                    width: { xs: "70%", sm: "80%", md: "35%", lg: 250 },
+                    flexShrink: 0,
+                    scrollSnapAlign: "start",
+                    backgroundColor: "white", // always default white
+                    color: "black",
+                    cursor: "pointer",
+                    transition:
+                      "transform 0.3s ease-in-out, background-color 0.3s ease-in-out",
+                    mb: { xs: 2, sm: 2, md: 2, lg: 0 },
 
-              <IconButton
-                onClick={handleNext}
-                sx={{
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  "&:hover": {
-                    backgroundColor: "#E2231A",
-                  },
-                  transition: "all 0.2s ease",
-                }}
-              >
-                <ArrowForwardIosIcon />
-              </IconButton>
+                    "&:hover": {
+                      backgroundColor: "#fefcf9", // hover color
+                      transform: "scale(1.05)", // zoom on hover
+                    },
+                  }}
+                >
+                  <Typography
+                    variant="subtitle2"
+                    fontWeight={700}
+                    fontSize={{ lg: "1.2rem" }}
+                    sx={{
+                      color: "black",
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      mt: 2,
+                      ml: { lg: 1.5, sm: 10, md: 4 },
+                      fontSize: "1rem",
+                      width: {
+                        lg: "220px",
+                        xs: "320px",
+                        sm: "460px",
+                        md: "250px",
+                      },
+                      color: "text.secondary",
+                    }}
+                  >
+                    {item.description}
+                  </Typography>
+                </Paper>
+              ))}
             </Box>
           </Box>
+        </Grid>
+
+        {/* Left Section - Image */}
+        <Grid
+          size={{ lg: 5, xs: 15, mt: 8 }}
+          order={{ xs: 2, sm: 2, md: 2, lg: 0 }}
+        >
+          <Box
+            component="img"
+            src={selected.image}
+            alt={selected.title}
+            sx={{
+              width: { lg: "90%", sm: "70%", xs: "80%" },
+              height: { lg: 450, md: 350, sm: 350, xs: 270 },
+              borderRadius: 3,
+              objectFit: "cover",
+              ml: { lg: 7, sm: 12, md: 15, xs: 6 },
+              mt: { lg: 5 },
+            }}
+          />
         </Grid>
       </Grid>
     </Box>
   );
 };
 
-export default HairSection;
+export default SpecialtySlider;

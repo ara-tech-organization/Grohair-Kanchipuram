@@ -19,7 +19,7 @@ import { Link, useLocation } from "react-router-dom";
 import Logo from "../Components/Images/Logo.jpeg";
 
 const navItems = [
-  { label: "Home", to: "/home" },
+  { label: "Home", to: "/" },
   { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
   { label: "Contact", to: "/contact" },

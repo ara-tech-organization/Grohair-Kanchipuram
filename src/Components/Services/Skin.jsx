@@ -1,255 +1,276 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Box,
   Typography,
-  IconButton,
   Paper,
   Grid,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
+// ✅ Swiper imports
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+
+// Hair treatment data
 const treatments = [
   {
-    title: "Scalp Micropigmentation (SMP)",
-    desc: "Creates the look of denser hair with precision pigmentation.",
-    image: require("../Images/s1.png"),
+    title: "Microblading",
+    desc: "A semi-permanent eyebrow enhancement technique that creates natural-looking brows through precise pigment strokes.",
+    image: require("../Images/H1.jpeg"),
   },
   {
-    title: "Eyebrow Transplantation",
-    desc: "Redefine your natural look with expert eyebrow restoration.",
-    image: require("../Images/s2.png"),
+    title: "Skin Brightening Treatment",
+    desc: "A strong treatment targeting day-to-day aches and chronic pain.",
+    image: require("../Images/H2.jpeg"),
   },
   {
-    title: "Stem X Pro Therapy",
-    desc: "Hair rejuvenation using stem cell growth factors.",
-    image: require("../Images/s3.jpeg"),
+    title: "Q-Switch Laser",
+    desc: "Advanced laser treatment that targets deep pigmentation, melasma, and stubborn dark spots. Safe for all skin types with minimal downtime.",
+    image: require("../Images/H3.jpeg"),
   },
   {
-    title: "Meso Therapy",
-    desc: "Nutrient-rich serums injected into the scalp to strengthen roots and regrow hair.",
-    image: require("../Images/s4.jpeg"),
+    title: "HydraFacial",
+    desc: "A multi-step facial that cleanses, exfoliates, and deeply hydrates the skin. Ideal for improving texture, tone, and overall clarity.",
+    image: require("../Images/H4.jpeg"),
   },
   {
-    title: "Oxygen Laser Therapy",
-    desc: "Laser technique + oxygen infusion to nourish the scalp and boost circulation.",
-    image: require("../Images/s5.jpeg"),
+    title: "Laser Hair Removal",
+    desc: "A permanent hair reduction solution using FDA-approved laser technology. Safe for all body areas and suitable for both men and women.",
+    image: require("../Images/H5.jpeg"),
   },
 ];
 
-const Skinsection = () => {
-  const [index, setIndex] = useState(2);
+const HairSection = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const selected = treatments[selectedIndex];
+  const scrollRef = useRef();
+  const cardRefs = useRef([]);
+
   const theme = useTheme();
-  const isMdDown = useMediaQuery(theme.breakpoints.down("md"));
-
-  const handlePrev = () => {
-    setIndex((prev) => (prev - 1 + treatments.length) % treatments.length);
-  };
-
-  const handleNext = () => {
-    setIndex((prev) => (prev + 1) % treatments.length);
-  };
-
-  const getCardStyle = (i) => {
-    const pos = (i - index + treatments.length) % treatments.length;
-    const relPos = pos > Math.floor(treatments.length / 2) ? pos - treatments.length : pos;
-
-    const scaleMap = [0.7, 0.85, 1, 0.85, 0.7];
-    const opacityMap = [0.4, 0.7, 1, 0.7, 0.4];
-    const zIndexMap = [1, 2, 3, 2, 1];
-    const translateXMap = [-100, 50, 200, 350, 500];
-
-    if (relPos >= -2 && relPos <= 2) {
-      const mapIndex = relPos + 2;
-      return {
-        transform: isMdDown
-          ? `scale(${scaleMap[mapIndex]})`
-          : `scale(${scaleMap[mapIndex]}) translateX(${translateXMap[mapIndex]}px)`,
-        opacity: opacityMap[mapIndex],
-        zIndex: zIndexMap[mapIndex],
-        transition: "all 0.5s ease",
-        position: "absolute",
-        left: { md:"60%",sm:-5,xs:5} ,
-        top: 0,
-        transformOrigin: "center",
-        transformStyle: "preserve-3d",
-        ...(isMdDown && { transform: `translateX(-50%) scale(${scaleMap[mapIndex]})` }),
-      };
-    }
-
-    return { display: "none" };
-  };
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Box
-      sx={{
-        backgroundColor: "#fff",
-        px: { xs: 3, sm: 2, md: 2, lg: 5 },
-        ml:{sm:4,md:2,xs:2},
-        py: 5,
-      }}
-    >
+    <Box sx={{ bgcolor: "#f5f0e9ff", py: 3, px: { xs: 2, md: 8, lg: 10 } }}>
       {/* Title */}
       <Typography
-        fontSize={{lg:'2rem',xs:'1.7rem',sm:'2rem'}}
+        fontSize={{ lg: "2rem", xs: "1.7rem", sm: "2rem" }}
         fontWeight="bold"
         textAlign="center"
         fontFamily="Poppins"
-        mt={{ lg: 2, md: 10 ,sm:6 ,xs:5}}
-        mb={{ xs: 5, sm: 6, md: 2, lg: 5 }}
-        ml={{md:-12}}
+        mt={{ lg: 4, md: 5, sm: 6, xs: 5 }}
+        mb={{ xs: 5, sm: 6, md: 4, lg: 10 }}
+        ml={{ lg: 4 }}
+        data-aos="flip-up"
       >
-        SKIN TREATMENT
+        SKIN{" "}
+        <Box component="span" color="#ff0000ff">
+          TREATMENT
+        </Box>
       </Typography>
 
-      <Grid
-        container
-        spacing={5}
-        alignItems="center"
-        direction={{ xs: "column", md: "row" }}
-      >
-        {/* LEFT CONTENT */}
-        <Grid item xs={12} md={5} display="flex" justifyContent="center">
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems={{ xs: "center", md: "flex-start" }}
-            textAlign={{ xs: "center", md: "left" }}
-            px={{ xs: 2, sm: 1, md: 3 }}
-            height="100%"
-            ml={{md:2}}
+      {isMobile ? (
+        // Mobile Swiper Slider
+        <Box mt={5}>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            autoplay={{ delay: 2500 }}
+            navigation
+            spaceBetween={20}
+            slidesPerView={1}
+            style={{ "--swiper-navigation-color": "red" }}
           >
-            <Typography variant="h6" color="text.secondary" gutterBottom mb={1}>
-              Top Skin Solutions at GloSkin Dindigul
-            </Typography>
-
-            <Typography
-             fontSize={{lg:'2rem',xs:'1.8rem'}}
-              fontWeight="bold"
-              color="red"
-              fontFamily="Poppins"
-              mb={3}
-              width={{ xs: "100%",sm:'600px', md: 400 }}
-            >
-              Our Most Popular Skin Treatments
-            </Typography>
-
-            <Typography
-              variant="h6"
-              color="black"
-              sx={{ maxWidth: { xs: "100%", md: '100px' ,sm:'100%' } }}
-              mb={5}
-            >
-              Our most popular skin treatments are crafted for issues like
-              pigmentation, acne, dullness, and aging. Each session is designed
-              by certified dermatologists to deliver healthy, radiant skin.
-            </Typography>
-
-            <Box
-              mt={2}
-              display="flex"
-              justifyContent={{ xs: "center", md: "flex-start" }}
-              gap={2}
-            >
-              <IconButton
-                onClick={handlePrev}
-                sx={{
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  "&:hover": { backgroundColor: "#E2231A" },
-                  transition: "all 0.2s ease",
-                }}
-              >
-                <ArrowBackIosNewIcon />
-              </IconButton>
-
-              <IconButton
-                onClick={handleNext}
-                sx={{
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  "&:hover": { backgroundColor: "#E2231A" },
-                  transition: "all 0.2s ease",
-                }}
-              >
-                <ArrowForwardIosIcon />
-              </IconButton>
-            </Box>
-          </Box>
-        </Grid>
-
-        {/* RIGHT CARDS */}
-        <Grid
-          item
-          xs={12}
-          md={7}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          sx={{
-            mt: { xs: 5, sm: 5, md: 0 },
-            ml: { lg: 1,md:'20%', sm: 0, xs: 0 },
-          }}
-        >
-          <Box
-            position="relative"
-            height={isMdDown ? 400 : 500}
-            width="100%"
-            maxWidth={isMdDown ? 320 : 600}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            {treatments.map((treatment, i) => (
-              <Paper
-                key={i}
-                sx={{
-                  width: isMdDown ? 260 : 340,
-                  height: isMdDown ? 360 : 450,
-                  borderRadius: 4,
-                  overflow: "hidden",
-                  position: "absolute",
-                  backgroundColor: "#fff",
-                  color: "black",
-                  ...getCardStyle(i),
-                }}
-                elevation={10}
-              >
+            {treatments.map((item, index) => (
+              <SwiperSlide key={index}>
                 <Box
                   component="img"
-                  src={treatment.image}
-                  alt={treatment.title}
+                  src={item.image}
+                  alt={item.title}
                   sx={{
                     width: "100%",
-                    height: "50%",
+                    height: "250px",
                     objectFit: "cover",
-                    filter: i === index ? "none" : "brightness(50%)",
-                    transition: "filter 0.3s ease",
+                    borderRadius: "16px",
                   }}
                 />
-                <Box p={3}>
-                  <Typography
-                    variant="subtitle1"
-                    fontWeight="bold"
-                    fontSize={isMdDown ? "1.2rem" : "1.5rem"}
-                    mt={-1}
-                  >
-                    {treatment.title}
-                  </Typography>
-                  <Typography variant="body2" mt={1}>
-                    {treatment.desc}
-                  </Typography>
-                </Box>
-              </Paper>
+                <Typography
+                  mt={2}
+                  fontWeight={700}
+                  sx={{ textAlign: "center" }}
+                >
+                  {item.title}
+                </Typography>
+                <Typography
+                  mt={2}
+                  color="text.secondary"
+                  sx={{ textAlign: "center" }}
+                >
+                  {item.desc}
+                </Typography>
+              </SwiperSlide>
             ))}
-          </Box>
+          </Swiper>
+        </Box>
+      ) : (
+        // Desktop Layout
+        <Grid container spacing={4}>
+          {/* Content Section */}
+          <Grid
+            data-aos="fade-down"
+            size={{ lg: 6, xs: 12 }}
+            ml={{ lg: -2, sm: 1 }}
+            mt={-3}
+            order={{ xs: 1, sm: 1, md: 1, lg: 0 }} // lg: content left
+          >
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              textAlign="center"
+              height="100%"
+              width={"100%"}
+              fontFamily="Poppins"
+            >
+              <Typography variant="h6" color="text.secondary" mb={1}>
+                Top Skin Solutions at GroHair Kanchipuram
+              </Typography>
+
+              <Typography
+                fontSize={{ lg: "1.8rem", xs: "1.8rem" }}
+                fontWeight="bold"
+                color="red"
+                fontFamily="Poppins"
+                mb={3}
+              >
+                Our Most Popular Skin Treatments
+              </Typography>
+
+              <Typography
+                fontSize={{ xs: "1rem", lg: "1.2rem", sm: "1.1rem" }}
+                color="black"
+                mb={5}
+              >
+                Our most popular skin treatments are crafted for issues like
+                pigmentation, acne, dullness, and aging. Each session is
+                designed by certified dermatologists to deliver healthy, radiant
+                skin.
+              </Typography>
+
+              {/* Card Slider */}
+              <Box
+                ref={scrollRef}
+                sx={{
+                  display: { xs: "block", sm: "block", md: "flex", lg: "flex" },
+                  flexWrap: { md: "wrap", lg: "nowrap" },
+                  justifyContent: { md: "center", lg: "flex-start" },
+                  overflow: {
+                    xs: "hidden",
+                    sm: "hidden",
+                    md: "hidden",
+                    lg: "auto",
+                  },
+                  gap: -1,
+                  pb: 1,
+                  scrollSnapType: { xs: "none", lg: "x mandatory" },
+                  width: "105%",
+                  height: "90%",
+                  ml: { lg: 1, md: -7, xs: 0 },
+                }}
+              >
+                {treatments.map((item, index) => (
+                  <Paper
+                    key={index}
+                    ref={(el) => (cardRefs.current[index] = el)}
+                    onClick={() => {
+                      setSelectedIndex(index);
+                      cardRefs.current[index]?.scrollIntoView({
+                        behavior: "smooth",
+                        inline: "center",
+                        block: "nearest",
+                      });
+                    }}
+                    sx={{
+                      py: 5,
+                      px: 2,
+                      ml: { xs: 4, lg: 2, sm: 7 },
+                      width: { xs: "70%", sm: "80%", md: "35%", lg: "40%" },
+                      flexShrink: 0,
+                      scrollSnapAlign: "start",
+                      backgroundColor: "white",
+                      color: "black",
+                      cursor: "pointer",
+                      transition:
+                        "transform 0.3s ease-in-out, background-color 0.3s ease-in-out",
+
+                      mb: { xs: 2, sm: 2, md: 2, lg: 0 },
+                      "&:hover": {
+                        backgroundColor: "#fefcf9",
+                        transform: "scale(1.05)",
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle2"
+                      fontWeight={700}
+                      fontSize={{
+                        lg: "1.2rem",
+                        md: "1.3rem",
+                        sm: "1.2rem",
+                        xs: "1.2rem",
+                      }}
+                      sx={{
+                        color: "black",
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        mt: 2,
+                        ml: { lg: 2, sm: 10, md: 4, xs: 2 },
+                        fontSize: "1rem",
+                        width: {
+                          lg: "220px",
+                          xs: "90%",
+                          sm: "460px",
+                          md: "250px",
+                        },
+                        color: "text.secondary",
+                      }}
+                    >
+                      {item.desc}
+                    </Typography>
+                  </Paper>
+                ))}
+              </Box>
+            </Box>
+          </Grid>
+
+          {/* Image Section */}
+          <Grid
+            data-aos="fade-up"
+            size={{ lg: 5, xs: 12 }}
+            order={{ xs: 2, sm: 2, md: 2, lg: 1 }} // lg: image right
+          >
+            <Box
+              component="img"
+              src={selected.image}
+              alt={selected.title}
+              sx={{
+                width: { lg: "100%", sm: "70%", xs: "90%" },
+                height: { lg: 450, md: 370, xs: 250 },
+                borderRadius: 3,
+                objectFit: "cover",
+                ml: { lg: 10, sm: 14, md: 17, xs: 3 },
+              }}
+            />
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </Box>
   );
 };
 
-export default Skinsection;
+export default HairSection;

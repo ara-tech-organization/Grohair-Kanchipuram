@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../Components/Header'
 import OurServicesSection from '../Components/Services/SeviceSection'
-import Skinsection from '../Components/Home/Skin'
+import Skinsection from '../Components/Services/Skin'
 import HairSection from '../Components/Home/Hair'
 import Footer from '../Components/Footer'
 

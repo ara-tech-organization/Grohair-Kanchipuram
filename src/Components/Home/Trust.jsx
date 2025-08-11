@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import CountUp from "react-countup";
-import TrustImage from "../Images/3.jpeg";
+import TrustImage from "../Images/2.jpg";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -26,7 +26,7 @@ const WhyTrustSection = () => {
         width: '100%' ,
         backgroundColor: "#f4f3f2ff",
         py: { xs: 4, sm: 8, md: -5 ,lg:10},
-        mt:{md:-10,lg:15}
+        mt:{md:10,lg:5}
       }}
     >
       <Grid container spacing={6} alignItems="center" >
@@ -51,7 +51,7 @@ const WhyTrustSection = () => {
                 mb: 2,
               }}
             >
-              Why Dindigul Clients Trust Us
+              Why Kanchipuram Clients Trust Us
             </Typography>
 
             <Typography
@@ -62,7 +62,7 @@ const WhyTrustSection = () => {
                 mb: 4,
               }}
             >
-              At GroHair & GloSkin Dindigul, we combine advanced equipment,
+              At GroHair & GloSkin kanchipuram, we combine advanced equipment,
               certified specialists, and a client–first mindset. That’s why
               we’re known for our consistent results and top-tier service.
             </Typography>
@@ -125,6 +125,7 @@ const WhyTrustSection = () => {
         {/* ✅ Right Image */}
         <Grid
          size={{lg:6,xs:12}}
+
           
           display="flex"
           justifyContent={{ xs: "center", lg: "flex-end" }}
@@ -147,6 +148,7 @@ const WhyTrustSection = () => {
                 height: "80%",
                 objectFit: "cover",
                 borderRadius: { xs: "20px", lg: "0 100px 0 100px" },
+                mr:{lg:15},
               }}
             />
           </Box>

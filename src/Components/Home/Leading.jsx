@@ -32,7 +32,7 @@ const Leading = () => {
           fontSize: { xs: "24px", sm: "32px", md: "30px" },
         }}
       >
-        Leading Hair & Skin Treatments at GroHair & GloSkin – Chidambaram
+        Leading Hair & Skin Treatments at GroHair & GloSkin – Kanchipuram
       </Typography>
 
       <Typography
@@ -43,7 +43,7 @@ const Leading = () => {
           color: "#555",
         }}
       >
-        At GroHair & GloSkin Chidambaram, we use proven hair restoration techniques and modern dermatological skincare.
+        At GroHair & GloSkin Kanchipuram, we use proven hair restoration techniques and modern dermatological skincare.
         Our team pairs advanced tech with clinical expertise for results that are not just visible, but long-lasting.
       </Typography>
 
@@ -57,38 +57,45 @@ const Leading = () => {
         }}
       >
         Whatever your goal—restoring hair volume, achieving clearer skin, or exploring cosmetic treatments—our
-        Chidambaram clinic is equipped to meet it.
+        Kanchipuram clinic is equipped to meet it.
       </Typography>
 
       {/* ✅ Icons row */}
       <Grid container spacing={2} justifyContent="center" sx={{ mt: 5 }}>
-        {iconData.map((item, index) => (
-          <Grid size={{xs:6,sm:4,lg:2}}  key={index} sx={{ textAlign: "center" }}>
-            <Avatar
-              sx={{
-                width: 70,
-                height: 70,
-                mx: "auto",
-                mb: 1,
-                backgroundColor: index === 0 ? "#e61928" : "#fff",
-                color: index === 0 ? "#fff" : "#e61928",
-              }}
-            >
-              {item.icon}
-            </Avatar>
-            <Typography
-              variant="caption"
-              sx={{
-                fontSize: { xs: "0.6rem", sm: "0.7rem", md: "0.75rem" },
-                mt: 0.5,
-                fontWeight: 500,
-              }}
-            >
-              {item.label}
-            </Typography>
-          </Grid>
-        ))}
-      </Grid>
+  {iconData.map((item, index) => (
+    <Grid size={{xs:6,sm:4,lg:2}} key={index} sx={{ textAlign: "center" }}>
+      <Avatar
+        sx={{
+          width: 90,
+          height: 90,
+          mx: "auto",
+          mb: 1,
+          
+          backgroundColor: "#fff",
+          color: "#e61928",
+          transition: "background-color 0.3s, color 0.3s",
+          "&:hover": {
+            backgroundColor: "#e61928",
+            color: "#fff",
+          },
+        }}
+      >
+        {item.icon}
+      </Avatar>
+      <Typography
+        variant="caption"
+        sx={{
+          fontSize: { xs: "0.6rem", sm: "0.7rem", md: "1rem" },
+          mt: 0.5,
+          fontWeight: 500,
+        }}
+      >
+        {item.label}
+      </Typography>
+    </Grid>
+  ))}
+</Grid>
+
     </Box>
   );
 };

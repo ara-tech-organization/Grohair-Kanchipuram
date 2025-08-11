@@ -24,7 +24,7 @@ const faqs = [
     answer: 'Definitely. Our solutions include chemical peels, HydraFacials, and laser therapy to target acne, dark spots, and dull skin',
   },
   {
-    question: 'Is laser hair removal available in Dindigul?',
+    question: 'Is laser hair removal available in Kanchipuram ?',
     answer: 'Yes! Our FDA-approved laser tech is safe for all skin types and delivers long-term hair reduction results.',
   },
   {
@@ -40,8 +40,8 @@ const faqs = [
     answer: 'For radiant, clear skin, we recommend a facial every 3–4 weeks to manage concerns like breakouts, dryness, or dullness.',
   },
   {
-    question: 'How do I get started at GloSkin Dindigul?',
-    answer: 'Simply drop by our Dindigul center or reach out online to book a custom skin consultation. Let’s glow!',
+    question: 'How do I get started at GloSkin Kanchipuram?',
+    answer: 'Simply drop by our Kanchipuram  center or reach out online to book a custom skin consultation. Let’s glow!',
   },
 ];
 
@@ -57,7 +57,7 @@ const FAQSkin = () => {
   };
 
   return (
-    <Box  data-aos="fade-up" sx={{ px: 4, py: 10, bgcolor: '#f9f9f9', mb: 4,width:{xs:'85%',lg:'100%',sm:'95%'} }}>
+    <Box  data-aos="fade-up" sx={{ px: 4, py: 10, bgcolor: '#f9f9f9', mb: 4,width:{xs:'85%',lg:'100%',sm:'95%',md:'98%'} }}>
       <Typography fontSize={{XS:'1.1rem',sm:'1.5rem'}} align="center" fontWeight={700} gutterBottom color="#000000ff">
         FREQUENTLY ASKED QUESTION  <Box component="span" color="#ff0000ff">
                         SKIN TREATMENT

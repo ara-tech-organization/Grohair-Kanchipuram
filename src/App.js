@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import BookNow from "./Pages/Booknow";
+import ThankYou from "./Components/Booknow/Thankyou";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/Booknow" element={<BookNow />} />
+        <Route path="/thankyou" element={<ThankYou />} />
       </Routes>
     </>
   );

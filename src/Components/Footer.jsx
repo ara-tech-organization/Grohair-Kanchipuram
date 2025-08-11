@@ -68,22 +68,20 @@ const Footer = () => {
           </Typography>
 
           <Typography fontSize={{ xs: 15, md: 17 }} lineHeight={1.6}>
-            1st floor, 2, UTHCHAV MALL, 6, Trichy - Dindugal Rd, <br />
-            near City Hospital, Gandhiji Nagar, Cooperative Nagar, <br />
-            Dindigul, Tamil Nadu 624001
+            1st Floor, KTS Towers, Nellukara St,above Federal Bank, Kanchipuram, Tamil Nadu 631502
           </Typography>
 
           <Box display="flex" alignItems="center" mt={2}>
             <PhoneIcon sx={{ color: "#fff", mr: 1 }} />
             <Typography fontSize={{ xs: 15, md: 17 }}>
-              +91 082701 56789
+              +91 097510 56789
             </Typography>
           </Box>
 
           <Box display="flex" alignItems="center" mt={1.5}>
             <EmailIcon sx={{ color: "#fff", mr: 1 }} />
             <Typography fontSize={{ xs: 15, md: 17 }}>
-              adgrohairdgl@gmail.com
+             adgrokanchipuram@gmail.com
             </Typography>
           </Box>
 
@@ -92,7 +90,7 @@ const Footer = () => {
             <Typography
               fontSize={{ xs: 15, md: 17 }}
               component="a"
-              href="https://www.instagram.com/adgrohairandgloskindgl/"
+              href="https://www.instagram.com/adgrohairandgloskinkanchipuram/?hl=en/"
               target="_blank"
               rel="noopener noreferrer"
               sx={{ textDecoration: "none", color: "inherit" }}
@@ -106,7 +104,7 @@ const Footer = () => {
             <Typography
               fontSize={{ xs: 15, md: 17 }}
               component="a"
-              href="https://www.facebook.com/adgrohairclinicdindigul"
+              href="https://www.facebook.com/adgrohairandgloskinkanchipuram/videos/?_rdr"
               target="_blank"
               rel="noopener noreferrer"
               sx={{ textDecoration: "none", color: "inherit" }}
@@ -123,7 +121,7 @@ const Footer = () => {
           display="flex"
           flexDirection="column"
           alignItems={{ xs: "center", sm: "center", md: "flex-start" }}
-          mt={{ lg: -16, sm: 0, md: -9 }}
+          mt={{ lg: -16, sm: 0, md: -22 }}
           
         >
           <Typography variant="h6" fontWeight="bold" mb={2}>
@@ -172,7 +170,7 @@ const Footer = () => {
           display="flex"
           flexDirection="column"
           alignItems={{ xs: "center", sm: "center", md: "flex-start" }}
-          mt={{ lg: -7 }}
+          mt={{ lg: -8 ,md:-15}}
         >
           <Typography variant="h6" fontWeight="bold" mb={2}>
             Locations
@@ -185,12 +183,12 @@ const Footer = () => {
               overflow: "hidden",
               width: { lg: "100%", md: "100%" },
               height: { xs: 200, sm: 200, md: 180 },
-              ml: { sm: 10, lg: -1, md: 0 },
+              ml: { sm: 2, lg: -1, md: 0 },
               mr: { md: 0, lg: 0 },
             }}
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.6053768974207!2d77.98699437404639!3d10.373403989751942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00ab258e111d63%3A0x4fce19ca52a1fd24!2sAdvanced%20GroHair%20%26%20GloSkin%20-%20Dindigul!5e0!3m2!1sen!2sin!4v1754127211267!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.0980272400466!2d79.70000458885497!3d12.836941699999992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52c30d834e7333%3A0xf1c8e3638d1aebe9!2sAdvanced%20GroHair%20%26%20GloSkin%20-%20Kanchipuram!5e0!3m2!1sen!2sin!4v1754631939220!5m2!1sen!2sin"
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

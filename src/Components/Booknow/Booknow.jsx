@@ -9,13 +9,17 @@ import {
   Select,
   InputLabel,
   FormControl,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import bgImage from "../Images/1.png";
+import { useNavigate } from "react-router-dom"; // <-- import navigate
+import bgImage from "../Images/1.jpg";
 
 const inputStyles = {
   "& .MuiOutlinedInput-root": {
@@ -49,12 +53,21 @@ const BookAppointment = () => {
     mobile: "",
   });
 
+  const [open, setOpen] = useState(false); // dialog open state
+  const navigate = useNavigate(); // initialize navigate
+
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Dialog close and navigate
+  const handleOk = () => {
+    setOpen(false);
+    navigate("/thankyou");
   };
 
   const handleSubmit = async () => {
@@ -78,7 +91,7 @@ const BookAppointment = () => {
         }
       );
       if (res.ok) {
-        alert("Appointment booked successfully!");
+        setOpen(true); // show dialog
       } else {
         alert("Failed to book appointment.");
       }
@@ -91,8 +104,8 @@ const BookAppointment = () => {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
-        backgroundImage: `url(${bgImage})`,
+        minHeight: { lg: "100vh", sm: "60vh" },
+        backgroundImage:` url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
@@ -100,7 +113,7 @@ const BookAppointment = () => {
         justifyContent: "center",
         px: 4,
         py: 5,
-        width: { lg: "100%", sm: "92%", md: "103%" },
+        width: { lg: "100%", sm: "92%", md: "95%" },
       }}
     >
       <Box
@@ -109,12 +122,12 @@ const BookAppointment = () => {
           bgcolor: "rgba(0,0,0,0.75)",
           p: 6,
           borderRadius: 3,
-          mt: { sm: 10, xs: 10, md: 2, lg: 10 },
+          mt: { sm: 8, xs: 10, md: 2, lg: 10 },
         }}
         data-aos="fade-up"
       >
         <Typography
-          variant="h4"
+          fontSize={{ xs: "1.5rem" }}
           align="center"
           fontWeight="bold"
           color="#ffffff"
@@ -125,9 +138,10 @@ const BookAppointment = () => {
         </Typography>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Grid container spacing={2} ml={{ lg: 10, md: 10, sm: 4 }}>
+               <Grid container spacing={2} ml={{ lg: 15, md: 10, sm: 7,xs:1 }}>
+
             {/* Row 1 */}
-            <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 250, sm: 200 }}>
+           <Grid size={{xs:12,sm:6,lg:5}}  data-aos="fade-up" width={{ lg: 210, sm: 200,xs:300,md:240 }}>
               <TextField
                 fullWidth
                 name="firstName"
@@ -138,7 +152,7 @@ const BookAppointment = () => {
                 sx={inputStyles}
               />
             </Grid>
-            <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-down" width={{ lg: 250, sm: 200 }}>
+            <Grid size={{xs:12,sm:6,lg:5}}  data-aos="fade-up" width={{ lg: 210, sm: 200,md:240 }}>
               <TextField
                 fullWidth
                 name="lastName"
@@ -151,7 +165,7 @@ const BookAppointment = () => {
             </Grid>
 
             {/* Row 2 */}
-            <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-down" width={{ lg: 250, sm: 200 }}>
+          <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 210, sm: 200,md:240 }}>
               <TextField
                 fullWidth
                 name="email"
@@ -162,7 +176,7 @@ const BookAppointment = () => {
                 sx={inputStyles}
               />
             </Grid>
-            <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-down" width={{ lg: 250, sm: 200 }}>
+            <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 210, sm: 200,md:240 }}>
               <TextField
                 fullWidth
                 name="mobile"
@@ -174,8 +188,11 @@ const BookAppointment = () => {
               />
             </Grid>
 
+
             {/* Row 3 */}
-            <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 250, sm: 200 }}>
+             <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 210, sm: 200 ,md:240}}>
+
+            
               <DatePicker
                 value={date}
                 onChange={(newDate) => setDate(newDate)}
@@ -216,10 +233,10 @@ const BookAppointment = () => {
               />
             </Grid>
 
-            <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 250, sm: 200,xs: 200}}>
+              <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 210, sm: 200,xs: 300,md:240}}>
+
               <TextField
                 select
-                label="Select time slot"
                 value={timeSlot}
                 onChange={(e) => setTimeSlot(e.target.value)}
                 fullWidth
@@ -250,7 +267,8 @@ const BookAppointment = () => {
             </Grid>
 
             {/* Row 4 */}
-            <Grid item xs={12} lg={12} data-aos="fade-up" width={{ lg: 520, xs: 200, sm: 420, md: 620 }}>
+              <Grid size={{xs:12,lg:12}}  data-aos="fade-up" width={{ lg: 440, xs: 300, sm: 420, md: 500 }}>
+
               <FormControl fullWidth sx={inputStyles}>
                 <InputLabel shrink htmlFor="treatment-select">
                   Select Treatment
@@ -278,7 +296,7 @@ const BookAppointment = () => {
               justifyContent="center"
               data-aos="zoom-in-up"
               mt={2}
-              ml={{ lg: 15, sm: 15, md: 25 }}
+              ml={{ lg: 12, sm: 15, md: 20, xs: -1 }}
             >
               <Button
                 onClick={handleSubmit}
@@ -298,6 +316,23 @@ const BookAppointment = () => {
               >
                 Book Appointment
               </Button>
+
+              <Dialog open={open} onClose={handleOk}>
+                <DialogTitle>Booking Confirmed ✅</DialogTitle>
+                <DialogContent>
+                  <Typography>
+                    Your appointment has been booked successfully!
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={handleOk}
+                    sx={{ mt: 2 }}
+                  >
+                    OK
+                  </Button>
+                </DialogContent>
+              </Dialog>
             </Grid>
           </Grid>
         </LocalizationProvider>
