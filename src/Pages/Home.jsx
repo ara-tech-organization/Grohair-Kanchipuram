@@ -1,4 +1,5 @@
 import { Box } from "@mui/material"; // ✅
+import { Helmet } from "react-helmet-async";
 
 import Herosection from "../Components/Home/Herosection";
 import Header from "../Components/Header";
@@ -18,6 +19,10 @@ import TreatmentSlider from "../Components/Home/Skin";
 function Home() {
   return (
     <Box>
+      <Helmet>
+        <title>Home - GroHair & GloSkin</title>
+        <meta name="description" content="Welcome to GroHair & GloSkin, your destination for premium hair and skin care in Kanchipuram." />
+      </Helmet>
       <Header />
       <Herosection />
       <Section />
