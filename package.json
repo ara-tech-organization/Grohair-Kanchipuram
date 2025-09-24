@@ -1,9 +1,10 @@
 {
   "name": "grohair-website",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "https://ara-tech-organization.github.io/Grohair-Kanchipuram",
+ "homepage": "https://ara-tech-organization.github.io/Grohair-Kanchipuram"
+,
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@heroicons/react": "^2.2.0",
@@ -19,6 +20,8 @@
     "react": "^19.1.1",
     "react-countup": "^6.5.3",
     "react-dom": "^19.1.1",
+    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^7.7.1",
     "react-scripts": "5.0.1",
     "swiper": "^10.3.1",

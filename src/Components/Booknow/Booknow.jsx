@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// src/Components/BookAppointment.jsx
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -18,8 +19,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useNavigate } from "react-router-dom"; // <-- import navigate
+import { useNavigate } from "react-router-dom";
 import bgImage from "../Images/1.jpg";
+import emailjs from "@emailjs/browser";
 
 const inputStyles = {
   "& .MuiOutlinedInput-root": {
@@ -30,16 +32,10 @@ const inputStyles = {
   },
   "& .MuiInputLabel-root": {
     color: "white",
-    "&.Mui-focused": {
-      color: "white",
-    },
+    "&.Mui-focused": { color: "white" },
   },
-  "& .MuiInputBase-input": {
-    color: "white",
-  },
-  "& svg": {
-    color: "white",
-  },
+  "& .MuiInputBase-input": { color: "white" },
+  "& svg": { color: "white" },
 };
 
 const BookAppointment = () => {
@@ -51,10 +47,12 @@ const BookAppointment = () => {
     lastName: "",
     email: "",
     mobile: "",
+    time: new Date().toLocaleString(),
   });
 
-  const [open, setOpen] = useState(false); // dialog open state
-  const navigate = useNavigate(); // initialize navigate
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const formRef = useRef();
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -64,48 +62,48 @@ const BookAppointment = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Dialog close and navigate
   const handleOk = () => {
     setOpen(false);
     navigate("/thankyou");
   };
 
-  const handleSubmit = async () => {
-    const payload = {
-      ...formData,
-      date: date.format("YYYY-MM-DD"),
-      time: timeSlot,
-      treatment: treatment,
-    };
-
-    try {
-      const res = await fetch(
-        "https://schoolcommunication-gmdtekepd3g3ffb9.canadacentral-01.azurewebsites.net/api/postMSMSForm/naturalsAppoinment",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer 123",
-          },
-          body: JSON.stringify(payload),
+  // ✅ Using EmailJS instead of backend fetch
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        "service_mgzuppo", // Your Service ID
+        "template_4049eny", // Your Template ID
+        formRef.current,
+        "VDlSCc2kgMbOtg_fj" // Your Public Key
+      )
+      .then(
+        () => {
+          setOpen(true);
+          // Reset form
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            mobile: "",
+            time: new Date().toLocaleString(),
+          });
+          setTimeSlot("");
+          setTreatment("");
+          setDate(dayjs());
+        },
+        (error) => {
+          console.error("FAILED...", error);
+          alert("Failed to book appointment.");
         }
       );
-      if (res.ok) {
-        setOpen(true); // show dialog
-      } else {
-        alert("Failed to book appointment.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong.");
-    }
   };
 
   return (
     <Box
       sx={{
         minHeight: { lg: "100vh", sm: "60vh" },
-        backgroundImage:` url(${bgImage})`,
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
@@ -137,62 +135,65 @@ const BookAppointment = () => {
           Book Your Appointment
         </Typography>
 
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-               <Grid container spacing={2} ml={{ lg: 15, md: 10, sm: 7,xs:1 }}>
+        {/* ✅ EmailJS Form */}
+        <Box component="form" ref={formRef} onSubmit={handleSubmit}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
+                <TextField
+                  fullWidth
+                  name="firstName"
+                  label="First Name"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  variant="outlined"
+                  sx={inputStyles}
+                  required
+                />
+              </Grid>
 
-            {/* Row 1 */}
-           <Grid size={{xs:12,sm:6,lg:5}}  data-aos="fade-up" width={{ lg: 210, sm: 200,xs:300,md:240 }}>
-              <TextField
-                fullWidth
-                name="firstName"
-                label="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-                variant="outlined"
-                sx={inputStyles}
-              />
-            </Grid>
-            <Grid size={{xs:12,sm:6,lg:5}}  data-aos="fade-up" width={{ lg: 210, sm: 200,md:240 }}>
-              <TextField
-                fullWidth
-                name="lastName"
-                label="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-                variant="outlined"
-                sx={inputStyles}
-              />
-            </Grid>
+              <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
+                <TextField
+                  fullWidth
+                  name="lastName"
+                  label="Last Name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  variant="outlined"
+                  sx={inputStyles}
+                  required
+                />
+              </Grid>
 
-            {/* Row 2 */}
-          <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 210, sm: 200,md:240 }}>
-              <TextField
-                fullWidth
-                name="email"
-                label="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-                variant="outlined"
-                sx={inputStyles}
-              />
-            </Grid>
-            <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 210, sm: 200,md:240 }}>
-              <TextField
-                fullWidth
-                name="mobile"
-                label="Your Phone Number"
-                value={formData.mobile}
-                onChange={handleChange}
-                variant="outlined"
-                sx={inputStyles}
-              />
-            </Grid>
+              <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
+                <TextField
+                  fullWidth
+                  type="email"
+                  name="email"
+                  label="Your Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  variant="outlined"
+                  sx={inputStyles}
+                  required
+                />
+              </Grid>
 
+              <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
+                <TextField
+                  fullWidth
+                  type="tel"
+                  name="mobile"
+                  label="Your Phone Number"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  variant="outlined"
+                  sx={inputStyles}
+                  required
+                />
+              </Grid>
 
-            {/* Row 3 */}
-             <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 210, sm: 200 ,md:240}}>
-
-            
+            <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
               <DatePicker
                 value={date}
                 onChange={(newDate) => setDate(newDate)}
@@ -233,42 +234,41 @@ const BookAppointment = () => {
               />
             </Grid>
 
-              <Grid size={{xs:12,sm:6,lg:6}}  data-aos="fade-up" width={{ lg: 210, sm: 200,xs: 300,md:240}}>
-
-              <TextField
-                select
-                value={timeSlot}
-                onChange={(e) => setTimeSlot(e.target.value)}
-                fullWidth
-                variant="outlined"
-                sx={inputStyles}
-                SelectProps={{ displayEmpty: true }}
-              >
-                <MenuItem value="" disabled>
-                  Select time slot
-                </MenuItem>
-                {[
-                  "10.00 AM to 11:00 AM",
-                  "11.00 AM to 12:00 PM",
-                  "12.00 PM to 1:00 PM",
-                  "1.00 PM to 2:00 PM",
-                  "2.00 PM to 3:00 PM",
-                  "3.00 PM to 4:00 PM",
-                  "4.00 PM to 5:00 PM",
-                  "5.00 PM to 6:00 PM",
-                  "6.00 PM to 7:00 PM",
-                  "7.00 PM to 8:00 PM",
-                ].map((slot) => (
-                  <MenuItem key={slot} value={slot}>
-                    {slot}
+              <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
+                <TextField
+                  select
+                  name="timeSlot"
+                  value={timeSlot}
+                  onChange={(e) => setTimeSlot(e.target.value)}
+                  fullWidth
+                  variant="outlined"
+                  sx={inputStyles}
+                  SelectProps={{ displayEmpty: true }}
+                  required
+                >
+                  <MenuItem value="" disabled>
+                    Select time slot
                   </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
+                  {[
+                    "10.00 AM to 11:00 AM",
+                    "11.00 AM to 12:00 PM",
+                    "12.00 PM to 1:00 PM",
+                    "1.00 PM to 2:00 PM",
+                    "2.00 PM to 3:00 PM",
+                    "3.00 PM to 4:00 PM",
+                    "4.00 PM to 5:00 PM",
+                    "5.00 PM to 6:00 PM",
+                    "6.00 PM to 7:00 PM",
+                    "7.00 PM to 8:00 PM",
+                  ].map((slot) => (
+                    <MenuItem key={slot} value={slot}>
+                      {slot}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
 
-            {/* Row 4 */}
-              <Grid size={{xs:12,lg:12}}  data-aos="fade-up" width={{ lg: 440, xs: 300, sm: 420, md: 500 }}>
-
+              <Grid size={{ xs: 12, sm: 12, lg: 12 }}>
               <FormControl fullWidth sx={inputStyles}>
                 <InputLabel shrink htmlFor="treatment-select">
                   Select Treatment
@@ -288,54 +288,55 @@ const BookAppointment = () => {
               </FormControl>
             </Grid>
 
-            {/* Button */}
-            <Grid
-              item
-              xs={12}
-              display="flex"
-              justifyContent="center"
-              data-aos="zoom-in-up"
-              mt={2}
-              ml={{ lg: 12, sm: 15, md: 20, xs: -1 }}
-            >
-              <Button
-                onClick={handleSubmit}
-                variant="contained"
-                size="large"
-                sx={{
-                  bgcolor: "#f93949",
-                  px: 5,
-                  py: 1.5,
-                  fontWeight: "bold",
-                  fontSize: { lg: "16px", xs: "10px" },
-                  borderRadius: "8px",
-                  "&:hover": {
-                    bgcolor: "#d72b3b",
-                  },
-                }}
-              >
-                Book Appointment
-              </Button>
+              {/* ✅ hidden field for current time */}
+              <input type="hidden" name="time" value={formData.time} />
 
-              <Dialog open={open} onClose={handleOk}>
-                <DialogTitle>Booking Confirmed ✅</DialogTitle>
-                <DialogContent>
-                  <Typography>
-                    Your appointment has been booked successfully!
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    color="success"
-                    onClick={handleOk}
-                    sx={{ mt: 2 }}
-                  >
-                    OK
-                  </Button>
-                </DialogContent>
-              </Dialog>
+              <Grid
+                size={{ xs: 12, sm: 12, lg: 12 }}
+                display="flex"
+                justifyContent="center"
+                data-aos="zoom-in-up"
+                mt={2}
+                // ml={{ lg: 12, sm: 15, md: 20, xs: -1 }}
+              >
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    bgcolor: "#f93949",
+                    px: 5,
+                    py: 1.5,
+                    fontWeight: "bold",
+                    fontSize: { lg: "16px", xs: "10px" },
+                    borderRadius: "8px",
+                    "&:hover": { bgcolor: "#d72b3b" },
+                  }}
+                >
+                  Book Appointment
+                </Button>
+
+                {/* Success Dialog */}
+                <Dialog open={open} onClose={handleOk}>
+                  <DialogTitle>Booking Confirmed ✅</DialogTitle>
+                  <DialogContent>
+                    <Typography>
+                      Your appointment has been booked successfully!
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      onClick={handleOk}
+                      sx={{ mt: 2 }}
+                    >
+                      OK
+                    </Button>
+                  </DialogContent>
+                </Dialog>
+              </Grid>
             </Grid>
-          </Grid>
-        </LocalizationProvider>
+          </LocalizationProvider>
+        </Box>
       </Box>
     </Box>
   );

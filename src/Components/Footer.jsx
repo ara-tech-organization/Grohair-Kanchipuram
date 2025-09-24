@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Box,
-  Grid,
-  Typography,
-  Link as MUILink
-} from "@mui/material";
+import { Box, Grid, Typography, Link as MUILink } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
@@ -33,7 +28,7 @@ const Footer = () => {
       >
         {/* Logo & Tagline */}
         <Grid
-          size={{xs:12,sm:10,md:2,lg:3}}
+          size={{ xs: 12, sm: 10, md: 2, lg: 3 }}
           data-aos="fade-down"
           display="flex"
           flexDirection="column"
@@ -56,8 +51,8 @@ const Footer = () => {
 
         {/* Contact Info */}
         <Grid
-          size={{xs:12,sm:10,md:3}}
-          ml={{  lg: 0 ,md:11}}
+          size={{ xs: 12, sm: 10, md: 3 }}
+          ml={{ lg: 0, md: 11 }}
           data-aos="fade-up"
           display="flex"
           flexDirection="column"
@@ -68,7 +63,8 @@ const Footer = () => {
           </Typography>
 
           <Typography fontSize={{ xs: 15, md: 17 }} lineHeight={1.6}>
-            1st Floor, KTS Towers, Nellukara St,above Federal Bank, Kanchipuram, Tamil Nadu 631502
+            1st Floor, KTS Towers, Nellukara St,above Federal Bank, Kanchipuram,
+            Tamil Nadu 631502
           </Typography>
 
           <Box display="flex" alignItems="center" mt={2}>
@@ -81,7 +77,7 @@ const Footer = () => {
           <Box display="flex" alignItems="center" mt={1.5}>
             <EmailIcon sx={{ color: "#fff", mr: 1 }} />
             <Typography fontSize={{ xs: 15, md: 17 }}>
-             adgrokanchipuram@gmail.com
+              Kanchipuram@adgrohair.com
             </Typography>
           </Box>
 
@@ -116,16 +112,15 @@ const Footer = () => {
 
         {/* Quick Links */}
         <Grid
-          size={{xs:12,sm:10,md:1,lg:1}}
+          size={{ xs: 12, sm: 10, md: 1, lg: 1 }}
           data-aos="zoom-in"
           display="flex"
           flexDirection="column"
           alignItems={{ xs: "center", sm: "center", md: "flex-start" }}
           mt={{ lg: -16, sm: 0, md: -22 }}
-          
         >
           <Typography variant="h6" fontWeight="bold" mb={2}>
-             Links
+            Links
           </Typography>
 
           <Box
@@ -165,12 +160,12 @@ const Footer = () => {
 
         {/* Location Map */}
         <Grid
-          size={{xs:12,sm:10,md:3}}
+          size={{ xs: 12, sm: 10, md: 3 }}
           data-aos="fade-down"
           display="flex"
           flexDirection="column"
           alignItems={{ xs: "center", sm: "center", md: "flex-start" }}
-          mt={{ lg: -8 ,md:-15}}
+          mt={{ lg: -8, md: -15 }}
         >
           <Typography variant="h6" fontWeight="bold" mb={2}>
             Locations
