@@ -1,16 +1,24 @@
 import React from "react";
+<<<<<<< HEAD
 import { Helmet } from "react-helmet";
 
+=======
+>>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
 import Header from "../Components/Header";
 import OurServicesSection from "../Components/Services/SeviceSection";
 import Skinsection from "../Components/Services/Skin";
 import HairSection from "../Components/Home/Hair";
 import Footer from "../Components/Footer";
+<<<<<<< HEAD
+=======
+import { Helmet } from "react-helmet-async";
+>>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
 
 function Services() {
   return (
     <div>
       <Helmet>
+<<<<<<< HEAD
         <title>Our Services – GroHair & GloSkin</title>
         <meta
           name="description"
@@ -39,6 +47,14 @@ function Services() {
         <meta name="twitter:image" content="%PUBLIC_URL%/image.jpg" />
       </Helmet>
 
+=======
+        <title>Our Services - GroHair & GloSkin</title>
+        <meta
+          name="description"
+          content="Explore the range of services offered by GroHair & GloSkin, the leading hair and skin care clinic in Kanchipuram."
+        />
+      </Helmet>
+>>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
       <Header />
       <OurServicesSection />
       <Skinsection />

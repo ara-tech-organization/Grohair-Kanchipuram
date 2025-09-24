@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import React from "react";
 import { Box } from "@mui/material";
 import { Helmet } from "react-helmet";
+=======
+import { Box } from "@mui/material"; // ✅
+import { Helmet } from "react-helmet-async";
+>>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
 
 import Header from "../Components/Header";
 import Herosection from "../Components/Home/Herosection";
@@ -16,6 +21,7 @@ function Home() {
   return (
     <Box>
       <Helmet>
+<<<<<<< HEAD
         <title>GroHair & GloSkin – Best Hair & Skin Care in Kanchipuram</title>
         <meta
           name="description"
@@ -47,6 +53,11 @@ function Home() {
         <meta name="twitter:image" content="%PUBLIC_URL%/image.jpg" />
       </Helmet>
 
+=======
+        <title>Home - GroHair & GloSkin</title>
+        <meta name="description" content="Welcome to GroHair & GloSkin, your destination for premium hair and skin care in Kanchipuram." />
+      </Helmet>
+>>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
       <Header />
       <Herosection />
       <Section />

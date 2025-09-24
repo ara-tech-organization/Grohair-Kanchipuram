@@ -1,14 +1,22 @@
+<<<<<<< HEAD
 import React from "react";
 import { Helmet } from "react-helmet";
 
 import Header from "../Components/Header";
 import BookAppointment from "../Components/Booknow/Booknow";
 import Footer from "../Components/Footer";
+=======
+import React from 'react'
+import { Helmet } from 'react-helmet-async'
+import BookAppointment from '../Components/Booknow/Booknow'
+import Footer from '../Components/Footer'
+>>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
 
 function Booknow() {
   return (
     <div>
       <Helmet>
+<<<<<<< HEAD
         <title>Book an Appointment – GroHair & GloSkin</title>
         <meta
           name="description"
@@ -38,6 +46,11 @@ function Booknow() {
       </Helmet>
 
       <Header />
+=======
+        <title>Book Appointment - GroHair & GloSkin</title>
+        <meta name="description" content="Schedule your appointment with GroHair & GloSkin, the leading hair and skin care clinic in Kanchipuram." />
+      </Helmet>
+>>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
       <BookAppointment />
       <Footer />
     </div>

@@ -1,14 +1,22 @@
+<<<<<<< HEAD
 import React from "react";
 import { Helmet } from "react-helmet";
 
 import Header from "../Components/Header";
 import Touch from "../Components/Contact/Touch";
 import Footer from "../Components/Footer";
+=======
+import React from 'react'
+import { Helmet } from 'react-helmet-async'
+import Footer from '../Components/Footer'
+import Touch from '../Components/Contact/Touch'
+>>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
 
 export default function Contact() {
   return (
     <div>
       <Helmet>
+<<<<<<< HEAD
         <title>Contact – GroHair & GloSkin</title>
         <meta
           name="description"
@@ -38,6 +46,11 @@ export default function Contact() {
       </Helmet>
 
       <Header />
+=======
+        <title>Contact Us - GroHair & GloSkin</title>
+        <meta name="description" content="Get in touch with GroHair & GloSkin, the premier hair and skin care clinic in Kanchipuram." />
+      </Helmet>
+>>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
       <Touch />
       <Footer />
     </div>
