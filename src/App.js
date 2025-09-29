@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { HelmetProvider } from 'react-helmet-async'
+import { HelmetProvider } from "react-helmet-async";
 import Services from "./Pages/Services";
 import Contact from "./Pages/Contact";
 import Header from "./Components/Header";
@@ -12,31 +12,23 @@ import Hairtransplant from "./Pages/Hairtransplant";
 function App() {
   return (
     <>
-<<<<<<< HEAD
-      {/* Routes */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/booknow" element={<BookNow />} />
-        <Route path="/thankyou" element={<ThankYou />} />
-        <Route path="/hairtransplant" element={<Hairtransplant />} />
-      </Routes>
-=======
-      <Header />
+      
+      {/* HelmetProvider for SEO-friendly head tags */}
       <HelmetProvider>
         <Routes>
+          {/* Home routes */}
           <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+
+          {/* Other pages */}
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/Booknow" element={<BookNow />} />
+          <Route path="/booknow" element={<BookNow />} />
           <Route path="/thankyou" element={<ThankYou />} />
+          <Route path="/hairtransplant" element={<Hairtransplant />} />
         </Routes>
       </HelmetProvider>
->>>>>>> 636cf233fbe5a233388b628873eb7623eb391336
     </>
   );
 }
