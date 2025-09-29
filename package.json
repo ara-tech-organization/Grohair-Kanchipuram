@@ -1,7 +1,7 @@
 {
   "name": "grohair-website",
   "version": "0.1.0",
- "homepage": "https://ara-tech-organization.github.io/Grohair-Kanchipuram"
+ "homepage": "/"
 ,
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
