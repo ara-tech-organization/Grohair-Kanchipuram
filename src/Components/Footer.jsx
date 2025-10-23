@@ -70,7 +70,7 @@ const Footer = () => {
           <Box display="flex" alignItems="center" mt={2}>
             <PhoneIcon sx={{ color: "#fff", mr: 1 }} />
             <Typography fontSize={{ xs: 15, md: 17 }}>
-              +91 097510 56789
+              +91 97510 56789
             </Typography>
           </Box>
 

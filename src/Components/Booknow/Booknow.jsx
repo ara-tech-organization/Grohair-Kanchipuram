@@ -51,6 +51,8 @@ const BookAppointment = () => {
   });
 
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState(""); // ✅ Gmail validation
   const navigate = useNavigate();
   const formRef = useRef();
 
@@ -60,6 +62,8 @@ const BookAppointment = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "mobile") setError("");
+    if (e.target.name === "email") setEmailError("");
   };
 
   const handleOk = () => {
@@ -67,20 +71,33 @@ const BookAppointment = () => {
     navigate("/thankyou");
   };
 
-  // ✅ Using EmailJS instead of backend fetch
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // ✅ Phone number must be exactly 10 digits
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(formData.mobile)) {
+      setError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    // ✅ Email must end with "@gmail.com"
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (!gmailRegex.test(formData.email)) {
+      setEmailError("Please enter a valid Gmail address (example@gmail.com).");
+      return;
+    }
+
     emailjs
       .sendForm(
-        "service_mgzuppo", // Your Service ID
-        "template_4049eny", // Your Template ID
+        "service_mgzuppo",
+        "template_4049eny",
         formRef.current,
-        "VDlSCc2kgMbOtg_fj" // Your Public Key
+        "VDlSCc2kgMbOtg_fj"
       )
       .then(
         () => {
           setOpen(true);
-          // Reset form
           setFormData({
             firstName: "",
             lastName: "",
@@ -135,7 +152,6 @@ const BookAppointment = () => {
           Book Your Appointment
         </Typography>
 
-        {/* ✅ EmailJS Form */}
         <Box component="form" ref={formRef} onSubmit={handleSubmit}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Grid container spacing={2}>
@@ -170,12 +186,14 @@ const BookAppointment = () => {
                   fullWidth
                   type="email"
                   name="email"
-                  label="Your Email"
+                  label="Your Gmail"
                   value={formData.email}
                   onChange={handleChange}
                   variant="outlined"
                   sx={inputStyles}
                   required
+                  error={!!emailError}
+                  helperText={emailError}
                 />
               </Grid>
 
@@ -190,49 +208,46 @@ const BookAppointment = () => {
                   variant="outlined"
                   sx={inputStyles}
                   required
+                  error={!!error}
+                  helperText={error}
                 />
               </Grid>
 
-            <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
-              <DatePicker
-                value={date}
-                onChange={(newDate) => setDate(newDate)}
-                slotProps={{
-                  textField: {
-                    fullWidth: true,
-                    variant: "outlined",
-                    InputLabelProps: {
-                      shrink: true,
-                      sx: {
-                        color: "white",
-                        "&.Mui-focused": { color: "white" },
-                      },
-                    },
-                    InputProps: {
-                      sx: {
-                        color: "white",
-                        "& input": {
+              <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
+                <DatePicker
+                  value={date}
+                  onChange={(newDate) => setDate(newDate)}
+                  slotProps={{
+                    textField: {
+                      fullWidth: true,
+                      variant: "outlined",
+                      InputLabelProps: {
+                        shrink: true,
+                        sx: {
                           color: "white",
-                          caretColor: "white",
+                          "&.Mui-focused": { color: "white" },
                         },
-                        "& .MuiSvgIcon-root": { color: "white" },
+                      },
+                      InputProps: {
+                        sx: {
+                          color: "white",
+                          "& input": { color: "white", caretColor: "white" },
+                          "& .MuiSvgIcon-root": { color: "white" },
+                        },
+                      },
+                      sx: {
+                        "& .MuiOutlinedInput-root": {
+                          backgroundColor: "transparent",
+                          "& fieldset": { borderColor: "white" },
+                          "&:hover fieldset": { borderColor: "white" },
+                          "&.Mui-focused fieldset": { borderColor: "white" },
+                        },
+                        "& .MuiInputBase-input": { color: "white" },
                       },
                     },
-                    sx: {
-                      "& .MuiOutlinedInput-root": {
-                        backgroundColor: "transparent",
-                        "& fieldset": { borderColor: "white" },
-                        "&:hover fieldset": { borderColor: "white" },
-                        "&.Mui-focused fieldset": { borderColor: "white" },
-                      },
-                      "& .MuiInputBase-input": {
-                        color: "white",
-                      },
-                    },
-                  },
-                }}
-              />
-            </Grid>
+                  }}
+                />
+              </Grid>
 
               <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
                 <TextField
@@ -269,26 +284,25 @@ const BookAppointment = () => {
               </Grid>
 
               <Grid size={{ xs: 12, sm: 12, lg: 12 }}>
-              <FormControl fullWidth sx={inputStyles}>
-                <InputLabel shrink htmlFor="treatment-select">
-                  Select Treatment
-                </InputLabel>
-                <Select
-                  id="treatment-select"
-                  value={treatment}
-                  onChange={(e) => setTreatment(e.target.value)}
-                  label="Select Treatment"
-                  displayEmpty
-                  notched
-                >
-                  <MenuItem value="Facial">Facial</MenuItem>
-                  <MenuItem value="Hair Treatment">Hair Treatment</MenuItem>
-                  <MenuItem value="Skin Peel">Skin Peel</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
+                <FormControl fullWidth sx={inputStyles}>
+                  <InputLabel shrink htmlFor="treatment-select">
+                    Select Treatment
+                  </InputLabel>
+                  <Select
+                    id="treatment-select"
+                    value={treatment}
+                    onChange={(e) => setTreatment(e.target.value)}
+                    label="Select Treatment"
+                    displayEmpty
+                    notched
+                  >
+                    <MenuItem value="Facial">Facial</MenuItem>
+                    <MenuItem value="Hair Treatment">Hair Treatment</MenuItem>
+                    <MenuItem value="Skin Peel">Skin Peel</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
 
-              {/* ✅ hidden field for current time */}
               <input type="hidden" name="time" value={formData.time} />
 
               <Grid
@@ -297,7 +311,6 @@ const BookAppointment = () => {
                 justifyContent="center"
                 data-aos="zoom-in-up"
                 mt={2}
-                // ml={{ lg: 12, sm: 15, md: 20, xs: -1 }}
               >
                 <Button
                   type="submit"
@@ -316,7 +329,6 @@ const BookAppointment = () => {
                   Book Appointment
                 </Button>
 
-                {/* Success Dialog */}
                 <Dialog open={open} onClose={handleOk}>
                   <DialogTitle>Booking Confirmed ✅</DialogTitle>
                   <DialogContent>

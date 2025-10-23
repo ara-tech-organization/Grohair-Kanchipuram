@@ -38,9 +38,30 @@ const Touch = () => {
     setFormData({ ...formData, [field]: e.target.value });
   };
 
-  // ✅ Using EmailJS
+  // ✅ EmailJS + Validation
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Basic validation
+    const phonePattern = /^[0-9]{10}$/;
+    if (!formData.firstName.trim()) {
+      alert("Please enter your first name.");
+      return;
+    }
+    if (!phonePattern.test(formData.mobile)) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
+    if (!formData.email.includes("@")) {
+      alert("Please enter a valid email address with '@'.");
+      return;
+    }
+    if (!treatment) {
+      alert("Please select a treatment.");
+      return;
+    }
+
+    // EmailJS send
     emailjs
       .sendForm(
         "service_mgzuppo", // Your Service ID

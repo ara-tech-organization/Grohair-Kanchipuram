@@ -106,7 +106,7 @@ const TestimonialsCarousel = () => {
                   xs: "90%",
                   sm: "70%",
                   md: "320px",
-                  lg: "30%",
+                  lg: "40%",
                 },
                 height: { xs: "auto", sm: "auto", md: 250, lg: 330 }, // ✅ Equal height for md+ screens
                 mx: "auto",
