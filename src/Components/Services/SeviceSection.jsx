@@ -258,7 +258,8 @@ const ServicesSection = () => {
           mt: 10,
           maxWidth: "1000px",
           mx: "auto",
-          p: { xs: 3, sm: 4, lg: 5, md: 2 },
+          p: { xs: 3, sm: 4, lg: 5
+            , md: 2 },
           display: { xs: "none", sm: "flex" },
           flexDirection: { sm: "row" },
           alignItems: "center",
