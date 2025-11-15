@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/Grohair-Kanchipuram/static/css/main.dcbe6450.css",
+    "main.js": "/Grohair-Kanchipuram/static/js/main.d9fbbaf1.js",
+    "static/media/s1.png": "/Grohair-Kanchipuram/static/media/s1.b67f4173ea9ca14b5c65.png",
+    "static/media/s2.png": "/Grohair-Kanchipuram/static/media/s2.a4baaaa15da79759b137.png",
+    "static/media/3.jpg": "/Grohair-Kanchipuram/static/media/3.38b54821b17072efed59.jpg",
+    "static/media/1.jpg": "/Grohair-Kanchipuram/static/media/1.5ef3d2a1905310ceb641.jpg",
+    "static/media/s4.jpeg": "/Grohair-Kanchipuram/static/media/s4.c03fe48acdd7c79d45d0.jpeg",
+    "static/media/H4.jpeg": "/Grohair-Kanchipuram/static/media/H4.1a34302b4b507ccc46c3.jpeg",
+    "static/media/H1.jpeg": "/Grohair-Kanchipuram/static/media/H1.5d568cdec3a9ee3a0a70.jpeg",
+    "static/media/H5.jpeg": "/Grohair-Kanchipuram/static/media/H5.a9b04304ebbbd488a6af.jpeg",
+    "static/media/2.jpg": "/Grohair-Kanchipuram/static/media/2.064f0b5cf6677516d2d6.jpg",
+    "static/media/03.jpg": "/Grohair-Kanchipuram/static/media/03.6d550d9f4cfd9da38786.jpg",
+    "static/media/06.jpg": "/Grohair-Kanchipuram/static/media/06.54d5fcf6635051f449b0.jpg",
+    "static/media/Logo.jpeg": "/Grohair-Kanchipuram/static/media/Logo.7d1faaf7684e76363ae3.jpeg",
+    "static/media/s3.jpeg": "/Grohair-Kanchipuram/static/media/s3.eda6c5ba3deb6bd60cf8.jpeg",
+    "static/media/H2.jpeg": "/Grohair-Kanchipuram/static/media/H2.ba590bcc25b1af4bd9a0.jpeg",
+    "static/media/02.jpg": "/Grohair-Kanchipuram/static/media/02.ab94b6d1f05dcaf1f160.jpg",
+    "static/media/07[1].jpg": "/Grohair-Kanchipuram/static/media/07[1].55c071b2a426945b36a0.jpg",
+    "static/media/05.jpg": "/Grohair-Kanchipuram/static/media/05.b4988bb731d5c3e7e94c.jpg",
+    "static/media/01.jpg": "/Grohair-Kanchipuram/static/media/01.22878c179116e2673741.jpg",
+    "static/media/08[1].jpg": "/Grohair-Kanchipuram/static/media/08[1].e34c6ae3dc0180502e96.jpg",
+    "static/media/H3.jpeg": "/Grohair-Kanchipuram/static/media/H3.c2172e51851d09edb800.jpeg",
+    "static/media/04.jpg": "/Grohair-Kanchipuram/static/media/04.b2df67fddf0b713363ee.jpg",
+    "static/media/s5.jpeg": "/Grohair-Kanchipuram/static/media/s5.a9ef26dbe28b5751fd83.jpeg",
+    "static/media/logo1.png": "/Grohair-Kanchipuram/static/media/logo1.762a9ce754782b5ace42.png",
+    "index.html": "/Grohair-Kanchipuram/index.html",
+    "main.dcbe6450.css.map": "/Grohair-Kanchipuram/static/css/main.dcbe6450.css.map",
+    "main.d9fbbaf1.js.map": "/Grohair-Kanchipuram/static/js/main.d9fbbaf1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dcbe6450.css",
+    "static/js/main.d9fbbaf1.js"
+  ]
+}
