@@ -42,11 +42,12 @@ const BookAppointment = () => {
   const [date, setDate] = useState(dayjs());
   const [timeSlot, setTimeSlot] = useState("");
   const [treatment, setTreatment] = useState("");
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    mobile: "",
+    phone: "",   // FIXED name to match EmailJS
     time: new Date().toLocaleString(),
   });
 
@@ -67,25 +68,26 @@ const BookAppointment = () => {
     navigate("/thankyou");
   };
 
-  // ✅ Using EmailJS instead of backend fetch
   const handleSubmit = (e) => {
     e.preventDefault();
+
     emailjs
       .sendForm(
-        "service_mgzuppo", // Your Service ID
-        "template_4049eny", // Your Template ID
+        "service_mgzuppo",
+        "template_4049eny",
         formRef.current,
-        "VDlSCc2kgMbOtg_fj" // Your Public Key
+        "VDlSCc2kgMbOtg_fj"
       )
       .then(
         () => {
           setOpen(true);
+
           // Reset form
           setFormData({
             firstName: "",
             lastName: "",
             email: "",
-            mobile: "",
+            phone: "",
             time: new Date().toLocaleString(),
           });
           setTimeSlot("");
@@ -135,10 +137,11 @@ const BookAppointment = () => {
           Book Your Appointment
         </Typography>
 
-        {/* ✅ EmailJS Form */}
         <Box component="form" ref={formRef} onSubmit={handleSubmit}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Grid container spacing={2}>
+
+              {/* FIRST NAME */}
               <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
                 <TextField
                   fullWidth
@@ -152,6 +155,7 @@ const BookAppointment = () => {
                 />
               </Grid>
 
+              {/* LAST NAME */}
               <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
                 <TextField
                   fullWidth
@@ -165,6 +169,7 @@ const BookAppointment = () => {
                 />
               </Grid>
 
+              {/* EMAIL */}
               <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
                 <TextField
                   fullWidth
@@ -179,13 +184,14 @@ const BookAppointment = () => {
                 />
               </Grid>
 
+              {/* PHONE - FIXED */}
               <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
                 <TextField
                   fullWidth
                   type="tel"
-                  name="mobile"
+                  name="phone"   // FIXED name
                   label="Your Phone Number"
-                  value={formData.mobile}
+                  value={formData.phone}
                   onChange={handleChange}
                   variant="outlined"
                   sx={inputStyles}
@@ -193,62 +199,46 @@ const BookAppointment = () => {
                 />
               </Grid>
 
-            <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
-              <DatePicker
-                value={date}
-                onChange={(newDate) => setDate(newDate)}
-                slotProps={{
-                  textField: {
-                    fullWidth: true,
-                    variant: "outlined",
-                    InputLabelProps: {
-                      shrink: true,
-                      sx: {
-                        color: "white",
-                        "&.Mui-focused": { color: "white" },
+              {/* DATE FIXED */}
+              <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
+                <DatePicker
+                  value={date}
+                  onChange={(newDate) => setDate(newDate)}
+                  slotProps={{
+                    textField: {
+                      fullWidth: true,
+                      variant: "outlined",
+                      InputLabelProps: {
+                        shrink: true,
+                        sx: { color: "white", "&.Mui-focused": { color: "white" } },
                       },
-                    },
-                    InputProps: {
-                      sx: {
-                        color: "white",
-                        "& input": {
+                      InputProps: {
+                        sx: {
                           color: "white",
-                          caretColor: "white",
+                          "& input": { color: "white" },
+                          "& .MuiSvgIcon-root": { color: "white" },
                         },
-                        "& .MuiSvgIcon-root": { color: "white" },
                       },
+                      sx: inputStyles,
                     },
-                    sx: {
-                      "& .MuiOutlinedInput-root": {
-                        backgroundColor: "transparent",
-                        "& fieldset": { borderColor: "white" },
-                        "&:hover fieldset": { borderColor: "white" },
-                        "&.Mui-focused fieldset": { borderColor: "white" },
-                      },
-                      "& .MuiInputBase-input": {
-                        color: "white",
-                      },
-                    },
-                  },
-                }}
-              />
-            </Grid>
+                  }}
+                />
+              </Grid>
 
+              {/* TIME SLOT FIXED */}
               <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
                 <TextField
                   select
+                  fullWidth
                   name="timeSlot"
                   value={timeSlot}
                   onChange={(e) => setTimeSlot(e.target.value)}
-                  fullWidth
                   variant="outlined"
                   sx={inputStyles}
                   SelectProps={{ displayEmpty: true }}
                   required
                 >
-                  <MenuItem value="" disabled>
-                    Select time slot
-                  </MenuItem>
+                  <MenuItem value="" disabled>Select time slot</MenuItem>
                   {[
                     "10.00 AM to 11:00 AM",
                     "11.00 AM to 12:00 PM",
@@ -261,43 +251,46 @@ const BookAppointment = () => {
                     "6.00 PM to 7:00 PM",
                     "7.00 PM to 8:00 PM",
                   ].map((slot) => (
-                    <MenuItem key={slot} value={slot}>
-                      {slot}
-                    </MenuItem>
+                    <MenuItem key={slot} value={slot}>{slot}</MenuItem>
                   ))}
                 </TextField>
               </Grid>
 
+              {/* TREATMENT - FIXED name */}
               <Grid size={{ xs: 12, sm: 12, lg: 12 }}>
-              <FormControl fullWidth sx={inputStyles}>
-                <InputLabel shrink htmlFor="treatment-select">
-                  Select Treatment
-                </InputLabel>
-                <Select
-                  id="treatment-select"
-                  value={treatment}
-                  onChange={(e) => setTreatment(e.target.value)}
-                  label="Select Treatment"
-                  displayEmpty
-                  notched
-                >
-                  <MenuItem value="Facial">Facial</MenuItem>
-                  <MenuItem value="Hair Treatment">Hair Treatment</MenuItem>
-                  <MenuItem value="Skin Peel">Skin Peel</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
+                <FormControl fullWidth sx={inputStyles}>
+                  <InputLabel shrink>Select Treatment</InputLabel>
+                  <Select
+                    name="treatment"   // FIXED name
+                    value={treatment}
+                    onChange={(e) => setTreatment(e.target.value)}
+                    label="Select Treatment"
+                    displayEmpty
+                    notched
+                  >
+                    <MenuItem value="Facial">Facial</MenuItem>
+                    <MenuItem value="Hair Treatment">Hair Treatment</MenuItem>
+                    <MenuItem value="Skin Peel">Skin Peel</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
 
-              {/* ✅ hidden field for current time */}
+              {/* HIDDEN DATE FIELD */}
+              <input
+                type="hidden"
+                name="date"
+                value={date ? date.format("DD/MM/YYYY") : ""}
+              />
+
+              {/* HIDDEN TIME FIELD */}
               <input type="hidden" name="time" value={formData.time} />
 
+              {/* BUTTON */}
               <Grid
                 size={{ xs: 12, sm: 12, lg: 12 }}
                 display="flex"
                 justifyContent="center"
-                data-aos="zoom-in-up"
                 mt={2}
-                // ml={{ lg: 12, sm: 15, md: 20, xs: -1 }}
               >
                 <Button
                   type="submit"
@@ -316,7 +309,6 @@ const BookAppointment = () => {
                   Book Appointment
                 </Button>
 
-                {/* Success Dialog */}
                 <Dialog open={open} onClose={handleOk}>
                   <DialogTitle>Booking Confirmed ✅</DialogTitle>
                   <DialogContent>
@@ -334,6 +326,7 @@ const BookAppointment = () => {
                   </DialogContent>
                 </Dialog>
               </Grid>
+
             </Grid>
           </LocalizationProvider>
         </Box>
