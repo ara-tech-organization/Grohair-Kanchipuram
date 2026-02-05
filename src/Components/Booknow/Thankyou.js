@@ -13,7 +13,7 @@ const ThankYou = () => {
     // ✅ Google Ads Conversion Tracking
     if (window.gtag) {
       window.gtag("event", "conversion", {
-        send_to: "AW-16777025590/dwI5CO7ah4QbELaw9L8-",
+        send_to: "AW-16777025590/yY3LCObr6_EbELaw9L8-",
         value: 500.0,
         currency: "INR",
       });
